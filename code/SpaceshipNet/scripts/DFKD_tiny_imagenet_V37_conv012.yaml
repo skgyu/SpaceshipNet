@@ -1,0 +1,129 @@
+# model options
+#depth
+name: DFKD_tiny_imagenet_V37_conv012
+gpu_ids:  [1] #[1] #
+###############################################################
+dataroot:  '../../dataset/'  
+model: model_CFE_mSARC_base
+model_files: ['model_CFE_mSARC_base_V37']
+
+train_normalize: [[0.5, 0.5, 0.5], [0.5, 0.5, 0.5]]
+prin_normalize:  [[0.5, 0.5, 0.5], [0.5, 0.5, 0.5]]
+
+########################################################################
+
+
+
+
+
+#######################################################################
+
+########################################################################
+save_epoch_freq: 10 #frequency of saving checkpoints at the end of epochs
+
+
+#################lr_strategy##################################
+start_epoch: 0 
+max_epoch: 399 
+
+############################continue train setting#########################
+which_epoch:  start
+continue_train:  False 
+
+
+
+g_steps: 200
+kd_steps: 2000
+
+optimizer_G:
+  lr:   [0.001] 
+
+
+optimizer_S:
+  lr:  [0.1]
+  lr_policy:  CosineAnnealingLR
+
+
+
+
+
+
+batch_size: 256 
+num_workers: 4
+
+#################################################################
+
+
+#####lambda#################################
+lambda_cls: 0.5 
+lambda_bn_meanvar: 1    
+first_bn_multiplier: 1 
+lambda_mSARC_cam_mse: 1
+lambda_mSARC_gradcams_mse: 1
+
+
+
+
+
+
+
+use_gen_mixup_cutmix: True
+gen_mixup_cutmix_p:  0.7
+
+
+aug_typ: channel_mix
+
+
+conv_idx: [0,1,2]
+
+
+
+
+use_mixup_cutmix: False
+
+
+
+use_clip_grad: False
+
+
+
+distill:
+  alpha: 1 
+  T: 30  
+  
+
+################################################
+
+generator:
+  arc: CMIGeneratorV3
+  ngf: 64
+  img_size: 64
+  nc: 3
+  pretrained_loc: 
+  init: kaiming                 
+  input_dim: 256
+
+student_net:
+  arc: ResNet18_1028_aap 
+  init: xavier          
+  pretrained_loc:  
+  # nchannel_input: 3
+  num_classes: 200
+
+
+teacher_net:
+  arc: ResNet34_1028_aap
+  init: xavier                
+  pretrained_loc: 'pretrained/DAFL/tiny_imagenet/tiny_imagenet_1223_200c_200epoch_resnet34_66_44.pth'
+  nchannel_input: 3
+  num_classes: 200
+
+
+
+
+
+input_dim: 256
+
+
+manualSeed: 40
+#   python train/train_cvpr2023.py --config scripts/DFKD_tiny_imagenet_V37_conv012.yaml
