@@ -5,7 +5,7 @@ Code of Data-Free Knowledge Distillation via Feature Exchange and Activation Reg
 
 
 
-During the preparation process before the paper submission, the code has been improved multiple times, and there are many redundant codes. The currently released code has been simply modified and refactored. We also conducted a simple test on CIFAR-100. When the teacher network is ResNet-34 and the student network is ResNet-18, we conducted experiments using 6 different random seeds (0, 20, 40, 60, 80, 100). The best result among them was 77.43%, the average result was 77.15%, the standard deviation was 0.21%, and the result reported in our paper is 77.41%.
+During the preparation process before the paper submission, the code has been enhanced multiple times, and there are many redundant codes. The currently released code has been simply modified and refactored. We also conducted a simple test on CIFAR-100. When the teacher network is ResNet-34 and the student network is ResNet-18, we conducted experiments using 6 different random seeds (0, 20, 40, 60, 80, 100). The best result among them was 77.43%, the average result was 77.15%, the standard deviation was 0.21%, and the result reported in our paper is 77.41%.
 
 
 
